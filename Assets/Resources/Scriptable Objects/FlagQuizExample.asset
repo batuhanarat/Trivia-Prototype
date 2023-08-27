@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1044c2e6734b40d693dbe38de7b2cd86, type: 3}
+  m_Name: FlagQuizExample
+  m_EditorClassIdentifier: 
+  questions:
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 32ae2eafad61348df8186f1973488c89, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Somalia
+    - Turkey
+    - Botswana
+    - Tunusia
+    correctAnsIndex: 3
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 649b7a9ccb21d4250873e3f4935757ab, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Senegal
+    - Malawi
+    - Tunisia
+    - Comoros
+    correctAnsIndex: 3
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 59115e7e20a124fe19e432913e9fa41d, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Bulgaria
+    - Sweden
+    - Ukraine
+    - France
+    correctAnsIndex: 2
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: abfc5ed10a57f4294b5683bbbc835aec, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Azerbaijan
+    - Israel
+    - Iraq
+    - Russia
+    correctAnsIndex: 0
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 43d85152600574aaaa65ab8cd3d47509, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Bahamas
+    - Chile
+    - Grenada
+    - United States
+    correctAnsIndex: 3
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 4695b95647a514bb9ba3757dfbaed21c, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Antigua and Barbuda
+    - Lebanon
+    - China
+    - Syria
+    correctAnsIndex: 1
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 551d890472c7c42ba938391f2d2bf4fa, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - North Macedonia
+    - San Marino
+    - Belgium
+    - Spain
+    correctAnsIndex: 3
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: 0acc96fccd0234000ade7343264f9fb1, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Jamaica
+    - Costa Rica
+    - Thailan
+    - Barbados
+    correctAnsIndex: 1
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: f9b397dc4027947f3ac8095ea574840e, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Guatemala
+    - Dominician Republic
+    - Argentina
+    - Grenada
+    correctAnsIndex: 0
+  - questionInfo: Which country's flag is this ?
+    questionImage: {fileID: 21300000, guid: b7802937960c9406e9ddeff822872b95, type: 3}
+    questionType: 1
+    audioClip: {fileID: 0}
+    options:
+    - Ukraine
+    - Jordan
+    - Sweden
+    - Cyprus
+    correctAnsIndex: 2
