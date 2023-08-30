@@ -15,13 +15,23 @@ public class InputManager : MonoBehaviour
 
     private TrajectoryPredictor trajectoryPredictor;
 
+    // Reference to the basketball manager
+    public BasketballManager basketballManager;
+
     private void Awake()
     {
         trajectoryPredictor = currentBallObject.GetComponent<TrajectoryPredictor>();
+        basketballManager = FindObjectOfType<BasketballManager>();  // Get a reference to the BasketballManager
     }
 
     void Update()
     {
+        // If the game has ended, don't process any further input
+        if (basketballManager.GameHasEnded)
+        {
+            return;
+        }
+
         // Check for touches
         if (Input.touchCount > 0)
         {
@@ -38,7 +48,7 @@ public class InputManager : MonoBehaviour
                     {
                         Vector2 currentTouchPosition = touch.position;
                         Vector2 forceDirection = startPosition - currentTouchPosition;
-                        Vector2 force = forceDirection * forceMultiplier * -1;
+                        Vector2 force = forceDirection * forceMultiplier;
 
                         trajectoryPredictor.PredictTrajectory(force);
                     }
@@ -49,7 +59,7 @@ public class InputManager : MonoBehaviour
                     {
                         endPosition = touch.position;
                         Vector2 forceDirection = startPosition - endPosition;
-                        Vector2 force = forceDirection * forceMultiplier * -1;
+                        Vector2 force = forceDirection * forceMultiplier;
 
                         trajectoryPredictor.ClearTrajectory();
 
@@ -60,7 +70,6 @@ public class InputManager : MonoBehaviour
                             hasShot = true;
                             Camera.main.GetComponent<CameraFollow>().StartFollowing();
                             Camera.main.GetComponent<CameraFollow>().CenterBasketball();
-
                         }
                     }
                     break;
@@ -70,12 +79,34 @@ public class InputManager : MonoBehaviour
         // Reset functionality (for testing purposes on a keyboard)
         if (Input.GetKeyDown(KeyCode.R))
         {
-            IShootable ballToReset = currentBallObject as IShootable;
-            if (ballToReset != null)
+            ResetShot();
+        }
+
+        if (hasShot)
+        {
+            IShootable ball = currentBallObject as IShootable;
+            if (ball.HasScored())
             {
-                ballToReset.ResetBall(ref hasShot);
-                Camera.main.GetComponent<CameraFollow>().StopFollowing();
+
+                basketballManager.ScoreBasket();
+                ResetShot();
             }
+            else if (ball.HasHitGround())
+            {
+                basketballManager.FailShot();
+                ResetShot();
+            }
+        }
+    }
+
+    // Reset the ball and related settings
+    public void ResetShot()
+    {
+        IShootable ballToReset = currentBallObject as IShootable;
+        if (ballToReset != null)
+        {
+            ballToReset.ResetBall(ref hasShot);
+            Camera.main.GetComponent<CameraFollow>().StopFollowing();
         }
     }
 }

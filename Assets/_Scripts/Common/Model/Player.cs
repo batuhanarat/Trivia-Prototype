@@ -12,7 +12,7 @@ public class Player
     }
 
     [SerializeField]
-    private int _points;         // Serialized field for points
+    private int _points; 
     public int points
     {
         get { return _points; }

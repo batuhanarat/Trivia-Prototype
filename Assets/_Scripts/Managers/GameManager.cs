@@ -8,21 +8,37 @@ public class GameManager : MonoBehaviour
 
     // Instance of the QuizManager
     private QuizManager quizManager;
+    private IMiniGameManager currentMiniGameManager;
 
     private void Start()
     {
         quizManager = FindObjectOfType<QuizManager>();
-
+        SetCurrentMiniGameManager(FindObjectOfType<BasketballManager>());
+        StartCurrentMiniGame();
         // Subscribe to the quiz finished event
         //quizManager.OnQuizFinished += HandleQuizFinished; TODO BATU
     }
 
+    public void SetCurrentMiniGameManager(IMiniGameManager miniGameManager)
+    {
+        currentMiniGameManager = miniGameManager;
+        currentMiniGameManager.Initialize(scoringManager, turnManager);
+    }
+    public void StartCurrentMiniGame()
+    {
+        currentMiniGameManager?.StartGame();
+    }
+
+    public void EndCurrentMiniGame()
+    {
+        currentMiniGameManager?.EndGame();
+    }
     private void HandleQuizFinished(bool isCorrect)
     {
         if (isCorrect)
         {
             // Add points to the current player's score
-            UpdateScore(turnManager.GetCurrentPlayerName(), 10); // Assuming 10 points for a correct answer
+            UpdateScore(turnManager.GetCurrentPlayerName(), 1); 
         }
 
         // End the current player's turn
@@ -58,7 +74,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Unsubscribe from the quiz finished event to avoid memory leaks
        // quizManager.OnQuizFinished -= HandleQuizFinished; TODO BATU
     }
 }

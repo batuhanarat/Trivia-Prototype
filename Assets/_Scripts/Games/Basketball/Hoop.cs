@@ -1,13 +1,28 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hoop : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public BasketballManager basketballManager; // A public variable to set the BasketballManager
+
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("Basketball"))
+        // If the basketballManager is not set in the inspector, find it
+        if (basketballManager == null)
         {
-            BasketballManager.Instance.ScoreBasket();
-            
+            basketballManager = FindObjectOfType<BasketballManager>();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Basketball"))
+        {
+            Rigidbody2D ballRigidbody = other.GetComponent<Rigidbody2D>();
+
+            if (ballRigidbody.velocity.y < 0)
+            {
+                basketballManager.ScoreBasket();
+            }
         }
     }
 }

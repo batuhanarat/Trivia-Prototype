@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Basketball
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - basket
   - Water
   - UI
-  - 
+  - Hoop
   - 
   - 
   - 
@@ -41,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backround
+    uniqueID: 620734389
+    locked: 0
+  - name: Ball
+    uniqueID: 4143522525
+    locked: 0
+  - name: Hoop
+    uniqueID: 1846296955
     locked: 0
