@@ -9,8 +9,13 @@ public class QuizUI : MonoBehaviour
    
     [SerializeField] private QuizManager quizManager;               //ref to the QuizManager script
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private GameObject  gamePanel;
-    [SerializeField] private Color correctCol, wrongCol, normalCol; //color of buttons
+
+    [SerializeField] private TMP_Text timerUI;
+    [SerializeField] public GameObject  gamePanel, QuizOverMenu;
+    [SerializeField] private Color correctCol; //color of buttons
+    [SerializeField] private Color wrongCol; //color of buttons
+    [SerializeField] private Color normalCol; //color of buttons
+
     [SerializeField] private Image questionImg;                     //image component to show image
   //  [SerializeField] private AudioSource questionAudio;             //audio source for audio clip
     [SerializeField] private TMP_Text questionInfoText;                 //text to show question
@@ -21,8 +26,10 @@ public class QuizUI : MonoBehaviour
     private bool answered = false;      //bool to keep track if answered or not
 
    // public TMP_Text TimerText { get => timerText; }                     //getter
-    public TMP_Text ScoreText { get => scoreText; }                     //getter
-    
+    public TMP_Text ScoreText { get => scoreText; }    
+    //getter
+    public TMP_Text TimerText { get => timerUI; }                     //getter
+
     //public GameObject GameOverPanel { get => gameOverPanel; }       //getter
 
     
@@ -65,7 +72,11 @@ public class QuizUI : MonoBehaviour
             //set the child text
             options[i].GetComponentInChildren<TMP_Text>().text = question.options[i];
             options[i].name = i.ToString();    //set the name of button
-            options[i].image.color = normalCol; //set color of button to normal
+            options[i].image.color =   normalCol;
+
+            
+           // var buttonx =  options[i].colors.normalColor ;
+            //buttonx= normalCol; //set color of button to normal
         }
 
         answered = false;                       
@@ -88,15 +99,19 @@ public class QuizUI : MonoBehaviour
                 if (val)
                 {
                     //set color to correct
-                    btn.image.color = correctCol;
-                    StartCoroutine(BlinkImg(btn.image));
+                  
+                   btn.image.color = correctCol;
+
+
+
+                   StartCoroutine(BlinkImg(btn.image));
                 }
                 else
                 {
                     //else set it to wrong color
                     
-                    
                     btn.image.color = wrongCol;
+                   
                 }
             }
         }
@@ -109,6 +124,7 @@ public class QuizUI : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             img.color = correctCol;
             yield return new WaitForSeconds(0.1f);
+            img.color = normalCol;
         }
     }
     
