@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
   - enabled: 1
     path: Assets/Scenes/BasketballMinigameScene.unity
-    guid: a3e0996fbab97468fae5a89a597f60d4
+    guid: a3c772917e0f49a4f82bcd609b0a6694
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a3357a448efb04e4dac0d42f47071a5f, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 589c165c412e84c0fb933b22b8d311e7, type: 2}

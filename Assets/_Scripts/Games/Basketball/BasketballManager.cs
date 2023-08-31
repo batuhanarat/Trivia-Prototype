@@ -1,3 +1,4 @@
+using _Scripts.Scriptable_Objects;
 using System;
 using System.Collections;
 using TMPro;
@@ -8,11 +9,14 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
 
     public ScoringManager scoringManager; // Reference to ScoringManager 
     public TurnManager turnManager; // Reference to TurnManager 
-    //public ShotsData shotsData; // Batu's scriptable object reference
+    public PlayerStats playerStat; // Batu's scriptable object reference
     public Basketball basketball; // Reference to the Basketball object
     public TextMeshProUGUI shotsLeftText;  
     public TextMeshProUGUI shotsMadeText;
+    public TextMeshProUGUI gameStatus;
+    public TextMeshProUGUI attempText;
 
+    public GameObject panel;
     public event Action OnScoreBasket;  // Event for a successful shot
     public event Action OnFailShot;     // Event for a failed shot
     private int currentShots;
@@ -35,7 +39,7 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
     public void StartGame()
     {
         //currentShots = shotsData.numberOfShots;
-        currentShots = 10;
+        currentShots = playerStat.quizScore;
         GameHasEnded = false;
         UpdateUI();
     }
@@ -48,7 +52,7 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
             currentShots--;
             successfulShots++;
             basketball.Score();
-            StartCoroutine(DisplayMessage("Success!", 1));
+            StartCoroutine(DisplayMessage("Boom!", 1));
             scoringManager.AddPoints(turnManager.GetCurrentPlayerName(), 1);
         //    OnScoreBasket?.Invoke();  // Fire the event
             UpdateUI();
@@ -85,19 +89,27 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
     private IEnumerator DisplayMessage(string message, float duration)
     {
         // do this through a UI text element
-        Debug.Log(message);
+        attempText.text = message;
 
         yield return new WaitForSeconds(duration);
 
         // Hide the message
-        Debug.Log("Message hidden");
+        attempText.text = "";
     }
 
     // Handle game ending logic
+
     public void EndGame()
     {
+        hasShot = false;
+        StartCoroutine(ExecuteEndGame());
+    }
+    public IEnumerator ExecuteEndGame()
+    {
+        yield return new WaitForSeconds(2);
         GameHasEnded = true;
-
+        gameStatus.text = "Your Score: " + successfulShots;
+        panel.SetActive(true);
         // TO DO: display the final score, trigger animations
         Debug.Log("Game Over");
 

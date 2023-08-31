@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        quizManager = FindObjectOfType<QuizManager>();
+        //quizManager = FindObjectOfType<QuizManager>();
         SetCurrentMiniGameManager(FindObjectOfType<BasketballManager>());
         StartCurrentMiniGame();
         // Subscribe to the quiz finished event

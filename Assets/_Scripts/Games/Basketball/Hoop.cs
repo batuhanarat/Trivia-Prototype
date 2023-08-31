@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class Hoop : MonoBehaviour
 {
     public BasketballManager basketballManager; // A public variable to set the BasketballManager
+    public AudioClip swiftyEffect;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class Hoop : MonoBehaviour
             if (ballRigidbody.velocity.y < 0)
             {
                 basketballManager.ScoreBasket();
+                SoundManager.Instance.PlayAudioEffect(swiftyEffect);
             }
         }
     }

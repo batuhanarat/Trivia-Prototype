@@ -5,6 +5,7 @@ using UnityEngine;
 public class Basketball : MonoBehaviour, IShootable
 {
     public BasketballManager basketballManager;
+    public AudioClip bouncyEffect;
 
     private Rigidbody2D rb;
     private Vector2 initialPosition;
@@ -51,10 +52,10 @@ public class Basketball : MonoBehaviour, IShootable
     public void ResetBall(ref bool hasShot)
     {
         hasShot = false;
-        StartCoroutine(ResetBall2());
+        StartCoroutine(ExecuteResetBall());
 
     }
-    private IEnumerator ResetBall2()
+    private IEnumerator ExecuteResetBall()
     {
         yield return new WaitForSeconds(2);
         transform.position = initialPosition;
@@ -68,11 +69,16 @@ public class Basketball : MonoBehaviour, IShootable
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (currentState == ShotState.InPlay && collision.gameObject.CompareTag("Ground"))
+        if(currentState == ShotState.InPlay)
         {
-            currentState = ShotState.Failed;
-            hitGround = true;
+            SoundManager.Instance.PlayAudioEffect(bouncyEffect);
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                currentState = ShotState.Failed;
+                hitGround = true;
+            }
         }
+
     }
     public void Score()
     {
