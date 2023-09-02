@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Basketball
   - Ground
+  - Edge
+  - hoop
+  - hoopedgecollider
   layers:
   - Default
   - TransparentFX

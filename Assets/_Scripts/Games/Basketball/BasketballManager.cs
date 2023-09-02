@@ -118,7 +118,7 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
 
     private void UpdateUI()
     {
-        shotsLeftText.text = currentShots.ToString();
+        shotsLeftText.text = "Shots: " +currentShots;
         shotsMadeText.text = "Score: " + (successfulShots); 
     }
 }

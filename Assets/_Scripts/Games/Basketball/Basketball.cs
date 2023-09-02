@@ -29,6 +29,8 @@ public class Basketball : MonoBehaviour, IShootable
         basketballManager.OnScoreBasket += HandleScoreBasket;
         basketballManager.OnFailShot += HandleFailShot;
     }
+
+
     private void HandleScoreBasket()
     {
         // Code to run when a basket is scored
@@ -57,7 +59,7 @@ public class Basketball : MonoBehaviour, IShootable
     }
     private IEnumerator ExecuteResetBall()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         transform.position = initialPosition;
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0f;
