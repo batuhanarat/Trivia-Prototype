@@ -15,7 +15,8 @@ public class QuizUI : MonoBehaviour
     [SerializeField] private Color correctCol; //color of buttons
     [SerializeField] private Color wrongCol; //color of buttons
     [SerializeField] private Color normalCol; //color of buttons
-
+    [SerializeField] private bool haveOptions ;
+    [SerializeField] private GameObject estimationPanel;
     [SerializeField] private Image questionImg;                     //image component to show image
   //  [SerializeField] private AudioSource questionAudio;             //audio source for audio clip
     [SerializeField] private TMP_Text questionInfoText;                 //text to show question
@@ -51,33 +52,42 @@ public class QuizUI : MonoBehaviour
         {
             case QuestionType.TEXT:
                 questionImg.transform.parent.gameObject.SetActive(false);   //deactivate image holder
+                haveOptions = true;
                 break;
             case QuestionType.IMAGE:
                 questionImg.transform.parent.gameObject.SetActive(true);    //activate image holder
  //               questionImg.transform.gameObject.SetActive(true);           //activate questionImg
                 questionImg.sprite = question.questionImage;                //set the image sprite
+                haveOptions = true;
+                break;
+            case QuestionType.ESTIMATION:
+                questionImg.transform.parent.gameObject.SetActive(false);   //deactivate image holder
+                haveOptions = false;
+                
                 break;
            
         }
 
         questionInfoText.text = question.questionInfo;                      //set the question text
 
-        //suffle the list of options
-      //  List<string> ansOptions = ShuffleList.ShuffleListItems<string>(question.options);
+        
 
         //assign options to respective option buttons
-        
-        for (int i = 0; i < options.Count; i++)
+        if (haveOptions)
         {
-            //set the child text
-            options[i].GetComponentInChildren<TMP_Text>().text = question.options[i];
-            options[i].name = i.ToString();    //set the name of button
-            options[i].image.color =   normalCol;
+            for (int i = 0; i < options.Count; i++)
+            {
+                //set the child text
+                options[i].GetComponentInChildren<TMP_Text>().text = question.options[i];
+                options[i].name = i.ToString();    //set the name of button
+                options[i].image.color =   normalCol;
 
             
-           // var buttonx =  options[i].colors.normalColor ;
-            //buttonx= normalCol; //set color of button to normal
+                // var buttonx =  options[i].colors.normalColor ;
+                //buttonx= normalCol; //set color of button to normal
+            }   
         }
+       
 
         answered = false;                       
 

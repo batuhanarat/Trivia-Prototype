@@ -3,5 +3,6 @@ public enum QuestionType
 {
     TEXT,
     IMAGE,
-    AUDIO
+    AUDIO,
+    ESTIMATION
 }
