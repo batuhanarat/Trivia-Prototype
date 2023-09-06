@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,7 +12,7 @@ public class QuizUI : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
 
     [SerializeField] private TMP_Text timerUI;
-    [SerializeField] public GameObject  gamePanel, QuizOverMenu;
+    [SerializeField] public GameObject  gamePanel, QuizOverMenu,estimationUIPanel,waitPanel;
     [SerializeField] private Color correctCol; //color of buttons
     [SerializeField] private Color wrongCol; //color of buttons
     [SerializeField] private Color normalCol; //color of buttons
@@ -21,10 +22,18 @@ public class QuizUI : MonoBehaviour
   //  [SerializeField] private AudioSource questionAudio;             //audio source for audio clip
     [SerializeField] private TMP_Text questionInfoText;                 //text to show question
     [SerializeField] private List<Button> options;                  //options button reference
-    
-    
+    [SerializeField] private Button estimateButton;
+    [SerializeField] private GameObject numpad;
+    [SerializeField] private GameObject optionsPanel;
     private Question question;          //store current question data
     private bool answered = false;      //bool to keep track if answered or not
+   
+    [SerializeField] private TMP_Text leftEstimationText;  
+    [SerializeField] private TMP_Text rightEstimationText;                 //text to show question
+    [SerializeField] private TMP_Text winLoseEstimationText;                 //text to show question
+    [SerializeField] private TMP_Text waitText;                 //text to show question
+    [SerializeField] private TMP_Text correctAnswerText;
+    //text to show question
 
    // public TMP_Text TimerText { get => timerText; }                     //getter
     public TMP_Text ScoreText { get => scoreText; }    
@@ -37,40 +46,47 @@ public class QuizUI : MonoBehaviour
     private void Start()
     {
         //add the listner to all the buttons
-        for (int i = 0; i < options.Count; i++)
+       
+            for (int i = 0; i < options.Count; i++)
         {
             Button localBtn = options[i];
             localBtn.onClick.AddListener(() => OnClick(localBtn));
         }
+        
     }
      public void SetQuestion(Question question)
     {
         //set the question
         this.question = question;
         //check for questionType
+        estimationPanel.SetActive(false);
+        numpad.SetActive(false);
+        optionsPanel.SetActive(true);
+
         switch (question.questionType)
         {
             case QuestionType.TEXT:
-                questionImg.transform.parent.gameObject.SetActive(false);   //deactivate image holder
+                questionImg.transform.gameObject.SetActive(false);   //deactivate image holder
                 haveOptions = true;
                 break;
             case QuestionType.IMAGE:
-                questionImg.transform.parent.gameObject.SetActive(true);    //activate image holder
+                questionImg.transform.gameObject.SetActive(true);    //activate image holder
  //               questionImg.transform.gameObject.SetActive(true);           //activate questionImg
                 questionImg.sprite = question.questionImage;                //set the image sprite
                 haveOptions = true;
                 break;
             case QuestionType.ESTIMATION:
-                questionImg.transform.parent.gameObject.SetActive(false);   //deactivate image holder
+                questionImg.transform.gameObject.SetActive(false);  // Deactivate image holder
                 haveOptions = false;
-                
+                optionsPanel.SetActive(false);
+                estimationPanel.SetActive(true);
+                numpad.SetActive(true);
                 break;
            
         }
 
         questionInfoText.text = question.questionInfo;                      //set the question text
 
-        
 
         //assign options to respective option buttons
         if (haveOptions)
@@ -87,13 +103,50 @@ public class QuizUI : MonoBehaviour
                 //buttonx= normalCol; //set color of button to normal
             }   
         }
-       
+
 
         answered = false;                       
 
     }
 
-    void OnClick(Button btn)
+     public void ActivatePlayerWait()
+     {
+         waitPanel.SetActive(true);
+         waitText.transform.gameObject.SetActive(true);
+
+     }
+
+    public void ShowStatistics(bool correct,double successRate,double OpponentSuccesRate,double correctAnswer)
+     {
+         waitPanel.SetActive(false);
+         int significantDigits = 1; 
+
+         estimationUIPanel.SetActive(true);
+         correctAnswerText.text ="Correct Answer: " +correctAnswer.ToString();
+         if (correct)
+         {
+             winLoseEstimationText.text = "EXCELLENT!";
+             
+             leftEstimationText.color = Color.green;
+             leftEstimationText.text = "%" + Math.Round(successRate,significantDigits).ToString();
+             
+             rightEstimationText.color = Color.red;
+             rightEstimationText.text = "%" + OpponentSuccesRate.ToString();
+         }
+         else
+         {
+             winLoseEstimationText.text = "SO CLOSE!";
+             
+             leftEstimationText.color = Color.red;
+             leftEstimationText.text = "%" + Math.Round(successRate,significantDigits).ToString();;
+             
+             rightEstimationText.color = Color.green;
+             rightEstimationText.text = "%" + OpponentSuccesRate.ToString();
+         }
+         
+     }
+
+         void OnClick(Button btn)
     {
         if (quizManager.GameStatus == GameStatus.PLAYING)
         {
@@ -126,6 +179,8 @@ public class QuizUI : MonoBehaviour
             }
         }
     }
+
+ 
     IEnumerator BlinkImg(Image img)
     {
         for (int i = 0; i < 2; i++)

@@ -27,7 +27,7 @@ public class QuizOverMenu : MonoBehaviour
 
     void OpenBasketScene()
     {
-        ScenesManager.Instance.LoadBasketballMinigameScene();
+        ScenesManager.Instance.LoadBasketballGame();
     }
     
     

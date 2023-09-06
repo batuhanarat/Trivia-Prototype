@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8983793801128518109}
   - component: {fileID: 5397526626059315142}
   m_Layer: 0
-  m_Name: Hoop
+  m_Name: Hoop2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 88.74, y: 0, z: 0}
 --- !u!212 &778509893959516526
 SpriteRenderer:
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a64114a916dd70a449452fda7a06328b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basketballManager: {fileID: 0}
+  swiftyEffect: {fileID: 0}
 --- !u!61 &5397526626059315142
 BoxCollider2D:
   m_ObjectHideFlags: 0

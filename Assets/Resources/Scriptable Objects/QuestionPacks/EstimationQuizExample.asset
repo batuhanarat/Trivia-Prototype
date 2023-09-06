@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1044c2e6734b40d693dbe38de7b2cd86, type: 3}
+  m_Name: EstimationQuizExample
+  m_EditorClassIdentifier: 
+  questions:
+  - questionInfo: How many episodes of Friends are there?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 236
+  - questionInfo: How many people survived the Titanic ?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 706
+  - questionInfo: When was the Eiffel Tower build ?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 1889
+  - questionInfo: How many elements are there in the periodic table?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 118
+  - questionInfo: How many people visited the Taj Mahal, India in 2020?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 4400000
+  - questionInfo: "How many different Pok\xE9mon characters are there in total?"
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 898
+  - questionInfo: How many minutes long is 'Pulp Fiction'?
+    questionImage: {fileID: 0}
+    questionType: 3
+    audioClip: {fileID: 0}
+    options: []
+    correctAnsIndex: 154

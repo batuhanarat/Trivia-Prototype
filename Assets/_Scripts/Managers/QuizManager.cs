@@ -38,6 +38,8 @@ public class QuizManager : NetworkBehaviour
         //select the question
         SelectQuestion();
         gameStatus = GameStatus.PLAYING;
+        NumpadScript.estimated += Estimate;
+
     }
     
     private void Update()
@@ -84,7 +86,81 @@ public class QuizManager : NetworkBehaviour
         quizGameUI.SetQuestion(selectedQuestion);
 
         questions.RemoveAt(val);
+
     }
+
+    public void Estimate(int value)
+    {
+        bool correct = false;
+        double successRate = CalculateSuccessRate(value);
+        double fakeSuccessRateofOpponent = 45.0;
+
+        if (successRate > fakeSuccessRateofOpponent)
+        {
+            correct = true;
+           
+        } 
+        correctAnswerCount++;
+        StartCoroutine(PlayWithFakeOpponent(correct,successRate,fakeSuccessRateofOpponent, (double)selectedQuestion.correctAnsIndex));
+
+        if (gameStatus == GameStatus.PLAYING)
+        {
+            if (questions.Count > 0)
+                //control the logic to see other player is ready
+            {
+                
+                //call SelectQuestion method again after 1s
+                Invoke("SelectQuestion", 0.4f);
+                currentTime = timeInSeconds;
+            }
+            else
+            {
+                _stats.setQuizScore(gameScore);
+                SoundManager.Instance.MuteTickTock();
+
+                GameEnd();
+            }
+        }
+
+    }
+
+    public double CalculateSuccessRate(int value)
+    {
+        double answer = (double)value;
+        double correctAnswer = (double) selectedQuestion.correctAnsIndex;
+        double failRate = (Math.Abs(answer - correctAnswer) / correctAnswer) * 100.0;
+        double successRate = 100.0 - failRate;
+        return successRate;
+    }
+
+    public IEnumerator PlayWithFakeOpponent(bool correct,double own, double opponent,double correctAnswer)
+    {
+        DeactivateTimer();
+        quizGameUI.ActivatePlayerWait();
+        yield return new WaitForSeconds(2.0f);
+        quizGameUI.ShowStatistics(correct, own,opponent,correctAnswer);
+
+
+    }
+    
+
+    public void DeactivateTimer()
+    {
+        gameStatus = GameStatus.WAITING;
+        SoundManager.Instance.MuteTickTock();
+        
+    }
+
+    public void ReActivateTimer()
+    {
+        gameStatus = GameStatus.WAITING;
+        SoundManager.Instance.UnMuteTickTock();
+
+
+        
+    }
+
+    
     public bool Answer(int selectedOptionIndex)
     {
         //set default to false

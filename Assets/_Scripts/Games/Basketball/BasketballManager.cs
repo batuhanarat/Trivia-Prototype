@@ -19,6 +19,7 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
     public Color boomColor;
     public Color failColor;
     public GameObject panel;
+    public ParticleSystem bigConfetti;
     public event Action OnScoreBasket;  // Event for a successful shot
     public event Action OnFailShot;     // Event for a failed shot
     private int currentShots;
@@ -33,6 +34,7 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
         //basketball.basketballManager = this;
         GameHasEnded = false;
         confetti.Stop();
+        bigConfetti.Play();
 
     }
     public void Initialize(ScoringManager scoringManager, TurnManager turnManager)
@@ -46,6 +48,8 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
         currentShots = playerStat.quizScore;
         GameHasEnded = false;
         UpdateUI();
+        bigConfetti.Play();
+
     }
     // This method is called when a basket is scored
     public void ScoreBasket()
@@ -100,11 +104,11 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
         // do this through a UI text element
 
         attempText.text = message;
-        
-        animator.SetBool("isPopped", true);
+        animator.SetBool("attempt",true);
+
 
         yield return new WaitForSeconds(duration);
-        animator.SetBool("isPopped", false);
+        animator.SetBool("attempt",false);
 
 
         // Hide the message
@@ -123,7 +127,11 @@ public class BasketballManager : MonoBehaviour, IMiniGameManager
         yield return new WaitForSeconds(0.5f);
         GameHasEnded = true;
         gameStatus.text = "Your Score: " + successfulShots;
+
         panel.SetActive(true);
+        
+        bigConfetti.Play();
+
         // TO DO: display the final score, trigger animations
         Debug.Log("Game Over");
 
