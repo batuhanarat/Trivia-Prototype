@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager Instance;
+    public Animator playButtonAnimator;
+    public Animator textAnimator;
 
     private void Awake()
     {
@@ -28,10 +30,25 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene(Scene.QuizScene.ToString());
     }
-    public void LoadBasketballMinigameScene()
+
+    public void LoadBasketballGame()
     {
+        StartCoroutine(BasketballMinigameSceneCourotine());
+    }
+    
+    public IEnumerator BasketballMinigameSceneCourotine()
+    {
+        
+
+        textAnimator.SetTrigger("appear");
+        playButtonAnimator.SetTrigger("isTrigger");
+
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(Scene.BasketballMinigameScene.ToString());
 
     }
+    
+    
+    
 }

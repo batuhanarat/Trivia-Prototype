@@ -35,6 +35,10 @@ public class SoundManager : MonoBehaviour
         _musicSource.mute = true;
     }
  
+    public void UnMuteTickTock()
+    {
+        _musicSource.mute = false;
+    }
     
     
 

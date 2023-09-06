@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035e641b2eac44f28006146f4ebc3020, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  score: 0
+  quizScore: 3
+  gameScore: 0

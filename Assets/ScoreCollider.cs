@@ -17,6 +17,7 @@ public class ScoreCollider : MonoBehaviour
             {
                 _basketballManager.ScoreBasket();
                 SoundManager.Instance.PlayAudioEffect(swiftyEffect);
+                _basketballManager.FireConfetti();
             }
         }
         
