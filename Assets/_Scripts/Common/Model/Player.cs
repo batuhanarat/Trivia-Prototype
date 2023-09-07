@@ -10,7 +10,13 @@ public class Player
         get { return _playerName; }
         set { _playerName = value; }
     }
-
+    [SerializeField]
+    private int _playerIndex;
+    public int playerIndex
+    {
+        get { return _playerIndex; }
+        set { _playerIndex = value; }
+    }
     [SerializeField]
     private int _points; 
     public int points
@@ -18,7 +24,12 @@ public class Player
         get { return _points; }
         private set { _points = value; }
     }
-
+    public Player(string name, int index)
+    {
+        _playerName = name;
+        _points = 0;
+        _playerIndex = index; // 0 for the first player, 1 for the second player
+    }
     public Player(string name)
     {
         _playerName = name;

@@ -18,7 +18,8 @@ public class ScenesManager : MonoBehaviour
     public enum Scene
     {
         QuizScene,
-        BasketballMinigameScene
+        BasketballMinigameScene,
+        ConnectFourMinigameScene
     }
 
     public void LoadScene(Scene scene)
@@ -35,20 +36,25 @@ public class ScenesManager : MonoBehaviour
     {
         StartCoroutine(BasketballMinigameSceneCourotine());
     }
-    
-    public IEnumerator BasketballMinigameSceneCourotine()
+    public void LoadConnectFourMinigameScene()
     {
-        
-
+        StartCoroutine(ConnectFourMinigameSceneCourotine());
+    }
+    private IEnumerator BasketballMinigameSceneCourotine()
+    {
         textAnimator.SetTrigger("appear");
         playButtonAnimator.SetTrigger("isTrigger");
-
         yield return new WaitForSeconds(1f);
-
         SceneManager.LoadScene(Scene.BasketballMinigameScene.ToString());
-
     }
-    
-    
-    
+    private IEnumerator ConnectFourMinigameSceneCourotine()
+    {
+        textAnimator.SetTrigger("appear");
+        playButtonAnimator.SetTrigger("isTrigger");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(Scene.ConnectFourMinigameScene.ToString());
+    }
+
+
+
 }

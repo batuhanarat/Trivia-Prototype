@@ -14,6 +14,10 @@ public class TurnManager : ScriptableObject
         return (currentPlayerIndex == 0) ? player1.playerName : player2.playerName;
     }
 
+    public int GetCurrentPlayerIndex()
+    {
+        return currentPlayerIndex;
+    }
     public void SwitchTurn()
     {
         currentPlayerIndex = 1 - currentPlayerIndex;  // Toggle between 0 and 1
